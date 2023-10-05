@@ -1,7 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartGameButton : MonoBehaviour
 {
+    private void FixedUpdate()
+    {
+        transform.Rotate(2, 2, 2);
+    }
+
     public void hoverstart()
     {
         transform.localScale = Vector3.one * 1.1f;
@@ -22,7 +29,7 @@ public class StartGameButton : MonoBehaviour
     }
     public void click()
     {
-        
+        SceneManager.LoadScene("Game Scene");
     }
     
 }

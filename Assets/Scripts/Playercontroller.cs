@@ -6,9 +6,10 @@ public class Playercontroller : MonoBehaviour
 {
     public float speed = 0.02f; // A variable that is outside a function and is public, is called field.
     public float jumpforce = 300;                         // Start is called before the first frame update
+    public float gravity;
     void Start()
     {
-        
+        Physics.gravity = new Vector3(0, gravity, 0);
     }
 
     // Update is called once per frame

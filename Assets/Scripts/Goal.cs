@@ -3,12 +3,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Trap : MonoBehaviour
+public class Goal : MonoBehaviour
 {
     IEnumerator OnCollisionEnter(Collision other)
     {
-        Destroy(other.gameObject);
-        yield return new WaitForSeconds(2);
-        SceneManager.LoadScene("Game Scene");
+        yield return new WaitForSeconds(0.3f);
+        SceneManager.LoadScene("Win Scene");
     }
 }
