@@ -22,8 +22,9 @@ public class Playercontroller : MonoBehaviour
         {
             Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
             rigidbody.AddForce(0,jumpforce, 0);
+            rigidbody.angularVelocity = new Vector3(2, 0, 0);
         }
-        transform.Translate(0,0,speed);
+        transform.Translate(0,0,speed, Space.World);
     }
 
     bool istouchingground()
@@ -38,3 +39,5 @@ public class Playercontroller : MonoBehaviour
 // Por que speed es un public variable but jumpforce is not? Al estar fuera de la funcion, hago que la variable funcione
 // en funciones mas adelante. Al hacerla publica hago que pueda modificarla later en unity.
 // Error
+
+// Lo que sea que tengas que hacer on la camara, tiene que ver con la ubicacion inicial del player.
