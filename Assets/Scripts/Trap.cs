@@ -8,7 +8,7 @@ public class Trap : MonoBehaviour
     IEnumerator OnCollisionEnter(Collision other)
     {
         Destroy(other.gameObject);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene("Game Scene");
     }
 }

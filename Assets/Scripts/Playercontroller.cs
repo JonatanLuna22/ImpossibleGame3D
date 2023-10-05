@@ -15,7 +15,7 @@ public class Playercontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump")) 
+        if (Input.GetButtonDown("Jump") && istouchingground()) 
             // Jump sucede por la modificacion de dos variables. fuerza hacia arriba y grabedad.
             // La masa no afecta en la caida pero en la fuerza hacia arriba.
             // && GameObject (esta en contacto con el suelo o no esta en el aire)
@@ -24,6 +24,12 @@ public class Playercontroller : MonoBehaviour
             rigidbody.AddForce(0,jumpforce, 0);
         }
         transform.Translate(0,0,speed);
+    }
+
+    bool istouchingground()
+    {
+        int layerMask = LayerMask.GetMask("Ground");
+        return Physics.CheckBox(transform.position, transform.lossyScale / 1.99f, transform.rotation, layerMask);
     }
 }
 // Por que se mueve hacia adelante cuando salta si el transform es un else? No es un else.
