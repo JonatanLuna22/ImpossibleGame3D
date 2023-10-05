@@ -5,7 +5,7 @@ using UnityEngine;
 public class Playercontroller : MonoBehaviour
 {
     public float speed = 0.02f; // A variable that is outside a function and is public, is called field.
-    // Start is called before the first frame update
+    public float jumpforce = 300;                         // Start is called before the first frame update
     void Start()
     {
         
@@ -19,13 +19,15 @@ public class Playercontroller : MonoBehaviour
             // La masa no afecta en la caida pero en la fuerza hacia arriba.
             // && GameObject (esta en contacto con el suelo o no esta en el aire)
         {
-            float jumpforce = 300;
-            Rigidbody rigidbody = GameObject.GetComponent<Rigidbody>();
+            Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
             rigidbody.AddForce(0,jumpforce, 0);
         }
         transform.Translate(0,0,speed);
     }
 }
-// Por que se mueve hacia adelante cuando salta si el transform es un else?
-// Por que 300 no lleva un f?
-// por que speed es un public variable but jumpforce is not?
+// Por que se mueve hacia adelante cuando salta si el transform es un else? No es un else.
+// Se mueve porque en cuanto la fuerza y es aplicada, inmediatamente despues el player se sigue moviendo ahcia adelante.
+// Por que 300 no lleva un f? Porque no tiene decimales. Funciona como un int.
+// Por que speed es un public variable but jumpforce is not? Al estar fuera de la funcion, hago que la variable funcione
+// en funciones mas adelante. Al hacerla publica hago que pueda modificarla later en unity.
+// Error
