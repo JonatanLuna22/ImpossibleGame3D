@@ -11,7 +11,7 @@ namespace DefaultNamespace
             {
                 return;
             }
-            Vector3 target = player.transform.position + new Vector3(0, 0, -10);
+            Vector3 target = player.transform.position + new Vector3(0, 1.86f, -4.94f);
             transform.position = target;
         }
     }

@@ -19,13 +19,15 @@ public class Playercontroller : MonoBehaviour
     private void FixedUpdate()      // Esta funcion tiene que ver con caer mas rapido al saltar.
     {
         Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
-        Vector3 velociTy = 
-        if (rigidbody.velocity.y < - 1f)
+        Vector3 velocity = rigidbody.velocity;
+        if (velocity.y < - 1f)
         {
             rigidbody.AddForce(0, fallgravity, 0);
         }
-        rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, speed);
-        
+
+        velocity.z = speed;
+        rigidbody.velocity = velocity;
+
         // transform.Translate(0,0,speed * Time.fixedDeltaTime, Space.World); Nos cargamos esto de aqui para sustituirlo por lo que esta justo arriva.
         // Aqui multiplicamos el speed por Time.fixedDeltaTime para que la velocidad del player este ligada al tiempo que ha pasado desde el ultimo update.
         // Y lo hemos movido de Udate a FixedUpdate para obligar al PC ha hacer la cosa (translate = movement) 15 veces por segundo.
