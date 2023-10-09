@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,17 @@ public class Playercontroller : MonoBehaviour
         Physics.gravity = new Vector3(0, gravity, 0);
     }
 
+    private void FixedUpdate()      // Esta funcion tiene que ver con caer mas rapido al saltar.
+    {
+        Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
+        if (rigidbody.velocity.y < -.1f)
+        {
+            rigidbody.AddForce(0, -2, 0);
+        }
+    }
+
     // Update is called once per frame
+    
     void Update()
     {
         if (Input.GetButtonDown("Jump") && istouchingground()) 
@@ -22,7 +33,7 @@ public class Playercontroller : MonoBehaviour
         {
             Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
             rigidbody.AddForce(0,jumpforce, 0);
-            rigidbody.angularVelocity = new Vector3(2, 0, 0);
+            //rigidbody.angularVelocity = new Vector3(2, 0, 0);     // Este es el giro al saltar.
         }
         transform.Translate(0,0,speed, Space.World);
     }
@@ -33,11 +44,10 @@ public class Playercontroller : MonoBehaviour
         return Physics.CheckBox(transform.position, transform.lossyScale / 1.99f, transform.rotation, layerMask);
     }
 }
-// Por que se mueve hacia adelante cuando salta si el transform es un else? No es un else.
-// Se mueve porque en cuanto la fuerza y es aplicada, inmediatamente despues el player se sigue moviendo ahcia adelante.
+// Por que se mueve hacia adelante cuando salta si el transform es un else? Answer: No es un else.
+// Se mueve porque en cuanto la fuerza es aplicada, inmediatamente despues el player se sigue moviendo ahcia adelante.
 // Por que 300 no lleva un f? Porque no tiene decimales. Funciona como un int.
 // Por que speed es un public variable but jumpforce is not? Al estar fuera de la funcion, hago que la variable funcione
 // en funciones mas adelante. Al hacerla publica hago que pueda modificarla later en unity.
-// Error
 
-// Lo que sea que tengas que hacer on la camara, tiene que ver con la ubicacion inicial del player.
+// Lo que sea que tengas que hacer con la camara, tiene que ver con la ubicacion inicial del player.
