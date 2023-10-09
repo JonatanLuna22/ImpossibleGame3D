@@ -20,6 +20,10 @@ public class Playercontroller : MonoBehaviour
     {
         Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
         Vector3 velocity = rigidbody.velocity;
+        velocity.y = jumpforce;
+        rigidbody.velocity = velocity;
+        rigidbody.angularVelocity = new Vector3(jumpspin, 0, 0);
+       
         if (velocity.y < - 1f)
         {
             rigidbody.AddForce(0, fallgravity, 0);
@@ -38,7 +42,7 @@ public class Playercontroller : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetButtonDown("Jump") && istouchingground()) 
+        if (Input.GetButton("Jump") && istouchingground()) 
             // Jump sucede por la modificacion de dos variables. fuerza hacia arriba y grabedad.
             // La masa no afecta en la caida pero en la fuerza hacia arriba.
             // && GameObject (esta en contacto con el suelo o no esta en el aire)
