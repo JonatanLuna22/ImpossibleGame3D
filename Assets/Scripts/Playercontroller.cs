@@ -8,24 +8,24 @@ public class Playercontroller : MonoBehaviour
     public float speed = 0.02f;             // A variable that is outside a function and is public, is called field.
     public float jumpforce = 300;           // Start is called before the first frame update
     public float gravity;
-    public float jumpspin;
+    public float jumpspin = 2;
     public float fallgravity = -2;
     void Start()
     {
-        // Application.targetFrameRate = targetFrameRate;
         Physics.gravity = new Vector3(0, gravity, 0);
     }
     
-
+// This is fucked up, fixed it:
     private void FixedUpdate()      // Esta funcion tiene que ver con caer mas rapido al saltar.
     {
         Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
+        Vector3 velociTy = 
         if (rigidbody.velocity.y < - 1f)
         {
             rigidbody.AddForce(0, fallgravity, 0);
         }
-
         rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, speed);
+        
         // transform.Translate(0,0,speed * Time.fixedDeltaTime, Space.World); Nos cargamos esto de aqui para sustituirlo por lo que esta justo arriva.
         // Aqui multiplicamos el speed por Time.fixedDeltaTime para que la velocidad del player este ligada al tiempo que ha pasado desde el ultimo update.
         // Y lo hemos movido de Udate a FixedUpdate para obligar al PC ha hacer la cosa (translate = movement) 15 veces por segundo.
@@ -43,7 +43,7 @@ public class Playercontroller : MonoBehaviour
         {
             Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
             rigidbody.AddForce(0,jumpforce, 0);
-            //rigidbody.angularVelocity = new Vector3(2, 0, 0);     // Este es el giro al saltar.
+            rigidbody.angularVelocity = new Vector3(jumpspin, 0, 0);     // Este es el giro al saltar.
         }
     }
 
@@ -61,3 +61,5 @@ public class Playercontroller : MonoBehaviour
 
 // Lo que sea que tengas que hacer con la camara, tiene que ver con la ubicacion inicial del player
 // Input funciona por cada frame no se que. Las fisicas funcionan deben ir en Fixupdates.
+
+// Tengo que anadir un physic material no friction al player.
