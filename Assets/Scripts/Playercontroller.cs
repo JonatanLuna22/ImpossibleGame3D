@@ -6,7 +6,7 @@ using UnityEngine;
 public class Playercontroller : MonoBehaviour
 {
     public float speed = 0.02f;             // A variable that is outside a function and is public, is called field.
-    public float jumpforce = 300;           // Start is called before the first frame update
+    public float jumpforce = 7;           // Start is called before the first frame update
     public float gravity;
     public float jumpspin = 2;
     public float fallgravity = -2;
@@ -19,11 +19,8 @@ public class Playercontroller : MonoBehaviour
     private void FixedUpdate()      // Esta funcion tiene que ver con caer mas rapido al saltar.
     {
         Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
-        Vector3 velocity = rigidbody.velocity;
-        velocity.y = jumpforce;
-        rigidbody.velocity = velocity;
         rigidbody.angularVelocity = new Vector3(jumpspin, 0, 0);
-       
+        Vector3 velocity = rigidbody.velocity;
         if (velocity.y < - 1f)
         {
             rigidbody.AddForce(0, fallgravity, 0);
@@ -48,7 +45,9 @@ public class Playercontroller : MonoBehaviour
             // && GameObject (esta en contacto con el suelo o no esta en el aire)
         {
             Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
-            rigidbody.AddForce(0,jumpforce, 0);
+            Vector3 velocity = rigidbody.velocity;
+            velocity.y = jumpforce;
+            rigidbody.velocity = velocity;
             rigidbody.angularVelocity = new Vector3(jumpspin, 0, 0);     // Este es el giro al saltar.
         }
     }
