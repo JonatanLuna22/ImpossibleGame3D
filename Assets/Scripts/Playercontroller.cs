@@ -19,9 +19,8 @@ public class Playercontroller : MonoBehaviour
     private void FixedUpdate()      // Esta funcion tiene que ver con caer mas rapido al saltar.
     {
         Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
-        rigidbody.angularVelocity = new Vector3(jumpspin, 0, 0);
         Vector3 velocity = rigidbody.velocity;
-        if (velocity.y < - 1f)
+        if (velocity.y < 0f)
         {
             rigidbody.AddForce(0, fallgravity, 0);
         }
